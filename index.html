@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Md. Ruhul Amin Lipu | OR Nurse Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0a1628;
+      --deep: #0d1f3c;
+      --teal: #0e9e8e;
+      --teal-light: #12c4b0;
+      --gold: #c9a84c;
+      --gold-light: #e8c56d;
+      --white: #f4f6f9;
+      --muted: #8a9bbf;
+      --card: #111e35;
+      --border: rgba(14,158,142,0.18);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--navy);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(14,158,142,0.18) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 40% at 80% 80%, rgba(201,168,76,0.10) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(14,158,142,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(14,158,142,0.06) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(14,158,142,0.15);
+      border: 1px solid var(--teal);
+      color: var(--teal-light);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      padding: 0.4rem 1rem;
+      border-radius: 2rem;
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.05;
+      color: var(--white);
+      animation: fadeUp 0.7s ease 0.1s both;
+    }
+
+    .hero h1 span {
+      color: var(--teal-light);
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      color: var(--muted);
+      margin: 1.2rem 0 0.5rem;
+      font-weight: 400;
+      animation: fadeUp 0.7s ease 0.2s both;
+    }
+
+    .hero-credentials {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.6rem;
+      margin: 1.5rem 0 2.5rem;
+      animation: fadeUp 0.7s ease 0.3s both;
+    }
+
+    .cred-tag {
+      background: rgba(201,168,76,0.12);
+      border: 1px solid rgba(201,168,76,0.35);
+      color: var(--gold-light);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      padding: 0.35rem 0.85rem;
+      border-radius: 2rem;
+      letter-spacing: 0.05em;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      animation: fadeUp 0.7s ease 0.4s both;
+    }
+
+    .btn-primary {
+      background: var(--teal);
+      color: #fff;
+      padding: 0.8rem 2rem;
+      border-radius: 0.4rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-primary:hover { background: var(--teal-light); transform: translateY(-2px); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--teal-light);
+      padding: 0.8rem 2rem;
+      border-radius: 0.4rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      border: 1.5px solid var(--teal);
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+    .btn-outline:hover { background: rgba(14,158,142,0.12); transform: translateY(-2px); }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--muted);
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      animation: bounce 2s infinite;
+    }
+    .scroll-hint svg { width: 20px; opacity: 0.5; }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10,22,40,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0.9rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--teal-light);
+    }
+    .nav-links { display: flex; gap: 1.8rem; list-style: none; }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--teal-light); }
+
+    /* ── SECTIONS ── */
+    section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5rem 2rem;
+    }
+
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      color: var(--teal);
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .section-title span { color: var(--teal-light); }
+
+    .divider {
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--teal), transparent);
+      margin-bottom: 2.5rem;
+      border-radius: 2px;
+    }
+
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .about-text p {
+      color: #b0bdd4;
+      line-height: 1.8;
+      margin-bottom: 1.2rem;
+      font-size: 1rem;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+    }
+
+    .stat-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 0.75rem;
+      padding: 1.4rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .stat-card:hover { border-color: var(--teal); transform: translateY(-3px); }
+
+    .stat-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--teal-light);
+      line-height: 1;
+    }
+    .stat-label {
+      color: var(--muted);
+      font-size: 0.82rem;
+      margin-top: 0.3rem;
+      font-weight: 500;
+    }
+
+    /* ── EXPERIENCE ── */
+    .exp-block {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .exp-block::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(180deg, var(--teal), var(--gold));
+      border-radius: 0 2px 2px 0;
+    }
+
+    .exp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .exp-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+    .exp-org {
+      color: var(--teal-light);
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-top: 0.2rem;
+    }
+    .exp-date {
+      background: rgba(201,168,76,0.12);
+      border: 1px solid rgba(201,168,76,0.3);
+      color: var(--gold-light);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      padding: 0.3rem 0.8rem;
+      border-radius: 2rem;
+      white-space: nowrap;
+    }
+
+    .role-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .role-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(14,158,142,0.12);
+      border-radius: 0.6rem;
+      padding: 1.2rem;
+    }
+
+    .role-card h4 {
+      color: var(--teal-light);
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.8rem;
+      text-transform: uppercase;
+    }
+
+    .role-card ul {
+      list-style: none;
+    }
+    .role-card ul li {
+      color: #9aabc4;
+      font-size: 0.88rem;
+      line-height: 1.6;
+      padding-left: 1rem;
+      position: relative;
+      margin-bottom: 0.3rem;
+    }
+    .role-card ul li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--teal);
+      font-size: 0.7rem;
+      top: 0.15rem;
+    }
+
+    /* ── SPECIALTIES ── */
+    .spec-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .spec-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 2rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .spec-card:hover { border-color: var(--teal); transform: translateY(-4px); }
+
+    .spec-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .spec-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      color: var(--white);
+      margin-bottom: 0.8rem;
+    }
+    .spec-card ul { list-style: none; }
+    .spec-card ul li {
+      color: #8a9bbf;
+      font-size: 0.85rem;
+      padding: 0.25rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .spec-card ul li:last-child { border-bottom: none; }
+
+    /* ── EQUIPMENT ── */
+    .equip-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .equip-tag {
+      background: rgba(14,158,142,0.08);
+      border: 1px solid rgba(14,158,142,0.2);
+      color: #a8d8d4;
+      font-size: 0.82rem;
+      padding: 0.4rem 1rem;
+      border-radius: 2rem;
+      font-family: 'DM Mono', monospace;
+      transition: background 0.2s;
+    }
+    .equip-tag:hover { background: rgba(14,158,142,0.18); }
+
+    /* ── CREDENTIALS ── */
+    .cred-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .cred-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 1.8rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .cred-card:hover { border-color: var(--gold); transform: translateY(-3px); }
+
+    .cred-card-icon {
+      font-size: 1.8rem;
+      margin-bottom: 0.3rem;
+    }
+    .cred-card h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      color: var(--white);
+    }
+    .cred-card .cred-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--teal-light);
+    }
+    .cred-card .cred-exp {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+    .cred-card .cred-status {
+      display: inline-block;
+      background: rgba(14,158,142,0.15);
+      border: 1px solid var(--teal);
+      color: var(--teal-light);
+      font-size: 0.7rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 2rem;
+      width: fit-content;
+      font-family: 'DM Mono', monospace;
+    }
+
+    /* ── PTE SCORES ── */
+    .pte-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .pte-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 0.75rem;
+      padding: 1.4rem;
+      text-align: center;
+    }
+
+    .pte-score {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      font-weight: 900;
+      color: var(--gold-light);
+    }
+    .pte-label {
+      color: var(--muted);
+      font-size: 0.78rem;
+      margin-top: 0.3rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* ── EDUCATION ── */
+    .edu-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 2rem 2.5rem;
+      display: flex;
+      gap: 2rem;
+      align-items: flex-start;
+    }
+    .edu-icon {
+      font-size: 2.5rem;
+      flex-shrink: 0;
+    }
+    .edu-degree {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+    .edu-school {
+      color: var(--teal-light);
+      font-weight: 500;
+      margin: 0.3rem 0;
+    }
+    .edu-year {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    /* ── CONTACT ── */
+    .contact-section {
+      background: var(--deep);
+      border-top: 1px solid var(--border);
+      padding: 5rem 2rem;
+      text-align: center;
+    }
+
+    .contact-inner {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .contact-info {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    .contact-item span { color: var(--teal-light); font-weight: 500; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy);
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 1.5rem;
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-family: 'DM Mono', monospace;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(8px); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .role-grid { grid-template-columns: 1fr; }
+      .pte-grid { grid-template-columns: repeat(2, 1fr); }
+      .nav-links { display: none; }
+      .edu-card { flex-direction: column; gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Md. R. A. Lipu</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#specialties">Specialties</a></li>
+    <li><a href="#credentials">Credentials</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-grid"></div>
+  <div class="badge">🩺 Operating Room Nurse · BSN · RN</div>
+  <h1>Md. Ruhul Amin<br><span>Lipu</span></h1>
+  <p class="hero-sub">OR Specialist · Square Hospital, Dhaka · Licensed in Bangladesh & New York</p>
+  <div class="hero-credentials">
+    <span class="cred-tag">BD RN #22463</span>
+    <span class="cred-tag">NY RN #978044</span>
+    <span class="cred-tag">CGFNS VSC #0010268763</span>
+    <span class="cred-tag">PTE Academic · Valid 2027</span>
+    <span class="cred-tag">EB-3 Schedule A · I-140 Approved</span>
+  </div>
+  <div class="hero-btns">
+    <a href="#experience" class="btn-primary">View Experience</a>
+    <a href="#contact" class="btn-outline">Contact Me</a>
+  </div>
+  <div class="scroll-hint">
+    <span>SCROLL</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="reveal">
+    <p class="section-label">// 01 — About</p>
+    <h2 class="section-title">Dedicated to <span>Surgical Excellence</span></h2>
+    <div class="divider"></div>
+  </div>
+  <div class="about-grid reveal">
+    <div class="about-text">
+      <p>A dedicated and skilled Operating Room Nurse with two years of hands-on experience in a 500-bed tertiary care hospital in Dhaka, Bangladesh. Proficient in both circulatory and scrub nurse roles, providing high-quality perioperative care across general, orthopedic, and neurosurgical procedures.</p>
+      <p>Adept at working in fast-paced surgical environments, ensuring patient safety, surgical team coordination, and strict adherence to sterile techniques. Currently advancing toward a career in the United States as part of the EB-3 Schedule A nursing immigration pathway, with an approved I-140 petition.</p>
+      <p>Holds an active, unencumbered RN license in both Bangladesh and New York State — ready to contribute immediately to any US surgical team.</p>
+    </div>
+    <div class="about-stats">
+      <div class="stat-card">
+        <div class="stat-number">2+</div>
+        <div class="stat-label">Years OR Experience</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">6</div>
+        <div class="stat-label">Operating Rooms</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">3</div>
+        <div class="stat-label">Surgical Specialties</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">2</div>
+        <div class="stat-label">Active RN Licenses</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="reveal">
+    <p class="section-label">// 02 — Experience</p>
+    <h2 class="section-title">Clinical <span>Work History</span></h2>
+    <div class="divider"></div>
+  </div>
+  <div class="exp-block reveal">
+    <div class="exp-header">
+      <div>
+        <div class="exp-title">Rotational Operating Room Nurse</div>
+        <div class="exp-org">Square Hospital Ltd. · Dhaka, Bangladesh</div>
+      </div>
+      <div class="exp-date">Feb 2024 – Present</div>
+    </div>
+    <p style="color:#8a9bbf; font-size:0.92rem; line-height:1.7; margin-bottom:1rem;">Currently working as a Rotational OR Nurse across six operating rooms, performing both circulatory and scrub nurse duties while providing comprehensive perioperative care to patients undergoing general, orthopedic, and neurosurgical procedures. Nurse-to-patient ratio: 1:4.</p>
+
+    <div class="role-grid">
+      <div class="role-card">
+        <h4>🔄 Circulatory Nurse Role</h4>
+        <ul>
+          <li>Patient assessments pre-operatively</li>
+          <li>Setting up ECG leads, BP cuffs & monitors</li>
+          <li>Accurate EHR documentation</li>
+          <li>Surgical team coordination</li>
+          <li>Inventory & supply management</li>
+        </ul>
+      </div>
+      <div class="role-card">
+        <h4>🔬 Scrub Nurse Role</h4>
+        <ul>
+          <li>Works within sterile surgical field</li>
+          <li>Direct surgical instrument assistance</li>
+          <li>Supports general, orthopedic & neuro OR</li>
+          <li>Strict sterile technique adherence</li>
+          <li>Smooth instrument handoff to surgeons</li>
+        </ul>
+      </div>
+      <div class="role-card">
+        <h4>💉 Medication & Anesthesia Support</h4>
+        <ul>
+          <li>Assists anesthesiologists during intubation</li>
+          <li>Prepares anesthetic medications</li>
+          <li>Administers blood products & antibiotics</li>
+          <li>IV/IM sedatives and narcotics</li>
+          <li>Per physician prescriptions</li>
+        </ul>
+      </div>
+      <div class="role-card">
+        <h4>🌿 Pre & Post-Operative Care</h4>
+        <ul>
+          <li>Patient & family counseling</li>
+          <li>Surgical procedure education</li>
+          <li>Informed consent facilitation</li>
+          <li>Post-op recovery oversight</li>
+          <li>Seamless handover to post-op team</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPECIALTIES -->
+<section id="specialties">
+  <div class="reveal">
+    <p class="section-label">// 03 — Surgical Specialties</p>
+    <h2 class="section-title">Clinical <span>Expertise</span></h2>
+    <div class="divider"></div>
+  </div>
+  <div class="spec-grid">
+    <div class="spec-card reveal">
+      <div class="spec-icon">🫀</div>
+      <h3>General Surgery</h3>
+      <ul>
+        <li>Laparoscopic Cholecystectomy</li>
+        <li>Laparoscopic Appendectomy</li>
+        <li>Suturing & Bandaging</li>
+        <li>Abscess Drainage</li>
+        <li>Wound Debridement</li>
+      </ul>
+    </div>
+    <div class="spec-card reveal">
+      <div class="spec-icon">🦴</div>
+      <h3>Orthopedic Surgery</h3>
+      <ul>
+        <li>Proximal Femoral Nailing (PFN)</li>
+        <li>Total Hip & Knee Arthroplasty</li>
+        <li>Hemiarthroplasty</li>
+        <li>Posterior Lumbar Interbody Fusion (PLIF)</li>
+        <li>Bone Plating, Screw Implants & Removals</li>
+        <li>Amputations</li>
+      </ul>
+    </div>
+    <div class="spec-card reveal">
+      <div class="spec-icon">🧠</div>
+      <h3>Neurosurgery</h3>
+      <ul>
+        <li>Craniotomy</li>
+        <li>External Ventricular Drainage (EVD)</li>
+        <li>Transforaminal Lumbar Interbody Fusion (TLIF)</li>
+        <li>Spinal Tumor Resection</li>
+        <li>Neurosurgical Patient Positioning</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Equipment -->
+  <div style="margin-top:3rem;" class="reveal">
+    <p class="section-label" style="margin-bottom:1rem;">// Equipment Proficiency</p>
+    <div class="equip-grid">
+      <span class="equip-tag">Vital Signs Machine</span>
+      <span class="equip-tag">Cardiac Monitor</span>
+      <span class="equip-tag">Crash Cart</span>
+      <span class="equip-tag">Ventilator</span>
+      <span class="equip-tag">IV Pumps</span>
+      <span class="equip-tag">ABG Machine</span>
+      <span class="equip-tag">CVP Lines</span>
+      <span class="equip-tag">A-Lines</span>
+      <span class="equip-tag">Anesthesia Machine</span>
+      <span class="equip-tag">C-Arm Machine</span>
+      <span class="equip-tag">Harmonic Machine</span>
+      <span class="equip-tag">Microscope</span>
+      <span class="equip-tag">Hi Speed Drill</span>
+      <span class="equip-tag">Ortho Drill</span>
+      <span class="equip-tag">Arthroscopic Instruments</span>
+      <span class="equip-tag">Laparoscopic Instruments</span>
+      <span class="equip-tag">Glucometer</span>
+      <span class="equip-tag">Suction Machine</span>
+    </div>
+  </div>
+</section>
+
+<!-- CREDENTIALS -->
+<section id="credentials">
+  <div class="reveal">
+    <p class="section-label">// 04 — Licenses & Credentials</p>
+    <h2 class="section-title">Professional <span>Certifications</span></h2>
+    <div class="divider"></div>
+  </div>
+  <div class="cred-grid">
+    <div class="cred-card reveal">
+      <div class="cred-card-icon">🇧🇩</div>
+      <h4>Bangladesh RN License</h4>
+      <div class="cred-num">License # 22463</div>
+      <div class="cred-exp">Expires: July 2029 · BNMC</div>
+      <div class="cred-status">✓ ACTIVE</div>
+    </div>
+    <div class="cred-card reveal">
+      <div class="cred-card-icon">🇺🇸</div>
+      <h4>New York State RN License</h4>
+      <div class="cred-num">License # 978044</div>
+      <div class="cred-exp">Expires: January 31, 2028</div>
+      <div class="cred-status">✓ ACTIVE</div>
+    </div>
+    <div class="cred-card reveal">
+      <div class="cred-card-icon">🌐</div>
+      <h4>CGFNS Visa Screen Certificate</h4>
+      <div class="cred-num">VSC # 0010268763</div>
+      <div class="cred-exp">Expires: January 6, 2031</div>
+      <div class="cred-status">✓ ACTIVE</div>
+    </div>
+    <div class="cred-card reveal">
+      <div class="cred-card-icon">🗣️</div>
+      <h4>PTE Academic (English)</h4>
+      <div class="cred-num">Speaking: 90 · Overall: 74+</div>
+      <div class="cred-exp">Valid Until: November 27, 2027</div>
+      <div class="cred-status">✓ VALID</div>
+    </div>
+    <div class="cred-card reveal">
+      <div class="cred-card-icon">✈️</div>
+      <h4>EB-3 Schedule A · I-140</h4>
+      <div class="cred-num">IOE0931220253</div>
+      <div class="cred-exp">Approved: April 16, 2025 · Priority Date: Apr 7, 2025</div>
+      <div class="cred-status">✓ APPROVED</div>
+    </div>
+  </div>
+
+  <!-- PTE Scores -->
+  <div style="margin-top:3rem;" class="reveal">
+    <p class="section-label" style="margin-bottom:0.5rem;">// PTE Academic Scores</p>
+    <div class="pte-grid">
+      <div class="pte-card"><div class="pte-score">90</div><div class="pte-label">Speaking</div></div>
+      <div class="pte-card"><div class="pte-score">74</div><div class="pte-label">Listening</div></div>
+      <div class="pte-card"><div class="pte-score">70</div><div class="pte-label">Writing</div></div>
+      <div class="pte-card"><div class="pte-score">62</div><div class="pte-label">Reading</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="reveal">
+    <p class="section-label">// 05 — Education</p>
+    <h2 class="section-title">Academic <span>Background</span></h2>
+    <div class="divider"></div>
+  </div>
+  <div class="edu-card reveal">
+    <div class="edu-icon">🎓</div>
+    <div>
+      <div class="edu-degree">Bachelor of Science in Nursing (BSN)</div>
+      <div class="edu-school">Square College of Nursing · Faculty of Medicine, University of Dhaka</div>
+      <div class="edu-school" style="color:#8a9bbf; font-size:0.9rem;">Dhaka, Bangladesh</div>
+      <div class="edu-year" style="margin-top:0.5rem;">Graduated: August 30, 2023</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div class="contact-section" id="contact">
+  <div class="contact-inner">
+    <p class="section-label" style="text-align:center;">// 06 — Contact</p>
+    <h2 class="section-title" style="text-align:center;">Get In <span>Touch</span></h2>
+    <div class="divider" style="margin:0 auto 2rem;"></div>
+    <p style="color:#8a9bbf; line-height:1.8;">Available for OR nursing positions in the United States. Currently in the consular processing stage for an EB-3 Schedule A visa with an approved I-140 petition. Licensed and credentialed to begin work immediately upon arrival.</p>
+    <div class="contact-info">
+      <div class="contact-item">📍 <span>Dhaka, Bangladesh</span></div>
+      <div class="contact-item">📞 <a href="tel:+8801749960488" style="color:var(--teal-light);text-decoration:none;">+880 1749-960488</a></div>
+      <div class="contact-item">✉️ <a href="mailto:ruhulaminlipu0@gmail.com" style="color:var(--teal-light);text-decoration:none;">ruhulaminlipu0@gmail.com</a></div>
+      <div class="contact-item">💼 <a href="https://www.linkedin.com/in/ruhul-amin-lipu" target="_blank" style="color:var(--teal-light);text-decoration:none;">linkedin.com/in/ruhul-amin-lipu</a></div>
+      <div class="contact-item">🏥 <span>Square Hospital Ltd.</span></div>
+      <div class="contact-item">🇺🇸 <span>NY RN License Active</span></div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  © 2025 Md. Ruhul Amin Lipu, BSN, RN · BD RN #22463 · NY RN #978044 · Built for Professional Use
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
